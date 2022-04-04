@@ -7,6 +7,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // create custom exceptions InvalidWeekException and InvalidDayOfWeekException first
+class InvalidWeekException extends IllegalArgumentException {
+    public InvalidWeekException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+
+class InvalidDayOfWeekException extends IllegalArgumentException {
+    public InvalidDayOfWeekException(String errorMessage) {
+        super(errorMessage);
+    }
+}
 
 public class Application {
     static final String INPUT_FILENAME = "austin_weather.csv";
@@ -83,8 +94,6 @@ public class Application {
 
 
         do {
-            // TODO: wrap the code inside the do-part of the do-while loop with a try/catch block
-            // when the exception is caught, print the message from variable integerExceptionWeekMessage above
             try {
                 weekToSelect = getWeekToSelectFromData(scanner);
                 weekNumberToSelect = Integer.parseInt(weekToSelect);
@@ -95,9 +104,6 @@ public class Application {
 
         } while(weekNumberToSelect == 0);
 
-        // TODO: Throw an InvalidWeekException if the week entered is greater than 10 or less than 1.
-        // Use a try/catch block here to catch the exception and print the message before adding an empty return statement.
-        // When throwing the exception, pass in the message from variable invalidNumberExceptionWeekMessage.
         try {
             if (weekNumberToSelect < 1 || weekNumberToSelect > 10) {
                 throw new InvalidWeekException(invalidNumberExceptionWeekMessage);
@@ -110,8 +116,6 @@ public class Application {
         }
 
         do {
-            // TODO: wrap the code inside the do-part of the do-while loop with a try/catch block
-            // when the exception is caught, print the message from variable integerExceptionDayOfWeekMessage above
             try {
                 dayToSelect = getDayToSelectFromData(scanner);
                 dayNumberToSelect = Integer.parseInt(dayToSelect);
@@ -122,9 +126,6 @@ public class Application {
 
         } while(dayNumberToSelect == 0);
 
-        // TODO: Throw an InvalidDayOfWeekException if the day of week entered is greater than 7 or less than 1.
-        // Use a try/catch block here to catch the exception and print the message before adding an empty return statement.
-        // When throwing the exception, pass in the message from variable invalidNumberExceptionDayOfWeekMessage.
         try {
             if ( dayNumberToSelect < 1 ||  dayNumberToSelect > 7) {
                 throw new InvalidDayOfWeekException(invalidNumberExceptionDayOfWeekMessage);
@@ -134,7 +135,6 @@ public class Application {
             System.out.println(invalidNumberExceptionDayOfWeekMessage);
             return;
         }
-
 
         // do not change code in main() below this line
         
@@ -146,17 +146,5 @@ public class Application {
         System.out.println("High temperature (degrees F): " + dayInfoArray[2].strip());
         System.out.println("Low temperature (degrees F): " + dayInfoArray[4].strip());
         System.out.println("Average temperature (degrees F): " + dayInfoArray[3].strip());
-    }
-    //TODO
-    static class InvalidWeekException extends IllegalArgumentException {
-        public InvalidWeekException(String errorMessage) {
-            super(errorMessage);
-        }
-    }
-
-    static class InvalidDayOfWeekException extends IllegalArgumentException {
-        public InvalidDayOfWeekException(String errorMessage) {
-            super(errorMessage);
-        }
     }
 }
